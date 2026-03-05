@@ -97,11 +97,13 @@ If no issues found, confirm the code is well-written and explain why.
 
   Explain = {
     prompt = 'Write an explanation for the selected code as paragraphs of text.',
+    description = 'Explain how the selected code works',
     system_prompt = 'COPILOT_EXPLAIN',
   },
 
   Review = {
     prompt = 'Review the selected code.',
+    description = 'Review the selected code for issues and improvements',
     system_prompt = 'COPILOT_REVIEW',
     callback = function(response, source)
       local diagnostics = {}
@@ -142,22 +144,27 @@ If no issues found, confirm the code is well-written and explain why.
 
   Fix = {
     prompt = 'There is a problem in this code. Identify the issues and rewrite the code with fixes. Explain what was wrong and how your changes address the problems.',
+    description = 'Fix bugs and issues in the selected code',
   },
 
   Optimize = {
     prompt = 'Optimize the selected code to improve performance and readability. Explain your optimization strategy and the benefits of your changes.',
+    description = 'Optimize the selected code for performance and readability',
   },
 
   Docs = {
     prompt = 'Please add documentation comments to the selected code.',
+    description = 'Add documentation comments to the selected code',
   },
 
   Tests = {
     prompt = 'Please generate tests for my code.',
+    description = 'Generate tests for the selected code',
   },
 
   Commit = {
     prompt = 'Write commit message for the change with commitizen convention. Keep the title under 50 characters and wrap message at 72 characters. Format as a gitcommit code block.',
+    description = 'Write a commit message for the staged changes',
     resources = {
       'gitdiff:staged',
     },
