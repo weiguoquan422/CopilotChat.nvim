@@ -759,4 +759,48 @@ M.github_models = {
   end,
 }
 
+M.deepseek = {
+  get_headers = function()
+    local api_key = os.getenv('DEEPSEEK_API_KEY')
+    if not api_key or api_key == '' then
+      error('DEEPSEEK_API_KEY environment variable is not set. Get your key at https://platform.deepseek.com/api_keys')
+    end
+    return {
+      ['Authorization'] = 'Bearer ' .. api_key,
+    }
+  end,
+
+  get_models = function()
+    return {
+      {
+        id = 'deepseek-chat',
+        name = 'DeepSeek Chat',
+        max_input_tokens = 65536,
+        max_output_tokens = 8192,
+        tokenizer = 'cl100k_base',
+        streaming = true,
+        tools = true,
+        reasoning = false,
+      },
+      {
+        id = 'deepseek-reasoner',
+        name = 'DeepSeek Reasoner',
+        max_input_tokens = 65536,
+        max_output_tokens = 8192,
+        tokenizer = 'cl100k_base',
+        streaming = true,
+        tools = false,
+        reasoning = true,
+      },
+    }
+  end,
+
+  prepare_input = M.copilot.prepare_input,
+  prepare_output = M.copilot.prepare_output,
+
+  get_url = function()
+    return 'https://api.deepseek.com/chat/completions'
+  end,
+}
+
 return M

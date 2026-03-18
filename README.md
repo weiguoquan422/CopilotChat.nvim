@@ -386,6 +386,7 @@ Add custom AI providers:
 
 - `copilot` - GitHub Copilot (default)
 - `github_models` - GitHub Marketplace models (disabled by default)
+- `deepseek` - DeepSeek AI (requires `DEEPSEEK_API_KEY` environment variable)
 
 # API Reference
 
