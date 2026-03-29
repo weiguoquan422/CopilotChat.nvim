@@ -800,4 +800,46 @@ M.github_models = {
   end,
 }
 
+--- Intranet AI provider for accessing internal network AI models.
+--- Configuration via environment variables:
+---   INTRANET_AI_URL   - Base URL of the internal AI API
+---                       (default: http://10.53.26.188/thinking/v1)
+---                       NOTE: The default uses plain HTTP. Use HTTPS or set
+---                       allow_insecure = true in your setup() if appropriate.
+---   INTRANET_AI_TOKEN - Bearer token for authentication (default: empty)
+M.intranet = {
+  get_headers = function()
+    local token = vim.env.INTRANET_AI_TOKEN or ''
+    return {
+      ['Content-Type'] = 'application/json',
+      ['Authorization'] = 'Bearer ' .. token,
+    }
+  end,
+
+  get_models = function()
+    return {
+      {
+        id = 'deepseek-r1-0528',
+        name = 'DeepSeek R1 (Intranet)',
+        tokenizer = 'o200k_base',
+        max_input_tokens = 49152,
+        max_output_tokens = 8192,
+        streaming = true,
+        tools = true,
+        reasoning = true,
+      },
+    }
+  end,
+
+  prepare_input = prepare_chat_input,
+  prepare_output = prepare_chat_output,
+
+  get_url = function()
+    local base_url = vim.env.INTRANET_AI_URL or 'http://10.53.26.188/thinking/v1'
+    -- Remove trailing slash if present
+    base_url = base_url:gsub('/$', '')
+    return base_url .. '/chat/completions'
+  end,
+}
+
 return M
