@@ -183,7 +183,7 @@ local function get_github_models_token(tag)
   end
 
   -- loading token from gh cli if available
-  if vim.fn.executable('gh') == 0 then
+  if vim.fn.executable('gh') ~= 0 then
     local result = utils.system({ 'gh', 'auth', 'token', '-h', 'github.com' })
     if result and result.code == 0 and result.stdout then
       local gh_token = vim.trim(result.stdout)
@@ -809,7 +809,7 @@ M.github_models = {
 ---   INTRANET_AI_TOKEN - Bearer token for authentication (default: empty)
 M.intranet = {
   get_headers = function()
-    local token = vim.env.INTRANET_AI_TOKEN or ''
+    local token = os.getenv('INTRANET_AI_TOKEN') or ''
     return {
       ['Content-Type'] = 'application/json',
       ['Authorization'] = 'Bearer ' .. token,
@@ -835,7 +835,7 @@ M.intranet = {
   prepare_output = prepare_chat_output,
 
   get_url = function()
-    local base_url = vim.env.INTRANET_AI_URL or 'http://10.53.26.188/thinking/v1'
+    local base_url = os.getenv('INTRANET_AI_URL') or 'http://10.53.26.188/thinking/v1'
     -- Remove trailing slash if present
     base_url = base_url:gsub('/$', '')
     return base_url .. '/chat/completions'
