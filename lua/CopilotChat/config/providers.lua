@@ -541,6 +541,8 @@ end
 local M = {}
 
 M.copilot = {
+  disabled = true,
+
   get_headers = function()
     local response, err = curl.get('https://api.github.com/copilot_internal/v2/token', {
       json_response = true,
