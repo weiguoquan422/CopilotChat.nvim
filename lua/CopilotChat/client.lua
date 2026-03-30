@@ -80,9 +80,14 @@ local function get_cached(cache, key, filler)
   end
 
   local value = filler()
-  cache[key] = value
-  cache[key .. '_expires_at'] = now + CACHE_TTL
-  return value
+  -- Only cache non-empty results so that failed fetches (e.g. due to network
+  -- timeouts) are retried on the next call instead of returning stale empty
+  -- data for the full TTL period.
+  if value and next(value) ~= nil then
+    cache[key] = value
+    cache[key .. '_expires_at'] = now + CACHE_TTL
+  end
+  return value or {}
 end
 
 --- Generate resource block with line numbers, truncating if necessary
