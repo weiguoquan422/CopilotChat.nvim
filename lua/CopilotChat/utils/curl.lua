@@ -6,7 +6,7 @@ local utils = require('CopilotChat.utils')
 local M = {}
 
 M.args = {
-  timeout = 30000,
+  timeout = 60000,
   raw = {
     '--retry',
     '2',
@@ -16,7 +16,7 @@ M.args = {
     '60',
     '--no-compressed',
     '--connect-timeout',
-    '10',
+    '30',
     '--tcp-nodelay',
     '--no-buffer',
   },
