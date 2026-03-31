@@ -560,6 +560,13 @@ function Client:ask(opts)
     self.current_job = nil
   end
 
+  -- When streaming has already completed successfully (received [DONE] or
+  -- finish_reason without errors), ignore any curl cleanup error that may
+  -- result from job:shutdown(0) being called to terminate the subprocess.
+  if is_stream and finished and not errored then
+    err = nil
+  end
+
   if err then
     local error_msg = 'Failed to get response: ' .. err
 
