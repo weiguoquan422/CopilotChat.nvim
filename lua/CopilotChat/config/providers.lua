@@ -311,7 +311,7 @@ local function prepare_chat_input(inputs, opts)
     stream = opts.model.streaming or false,
   }
 
-  if opts.tools and #opts.tools > 0 and opts.model.tools then
+  if opts.tools and opts.model.tools then
     out.tools = vim.tbl_map(function(tool)
       return {
         type = 'function',
@@ -827,7 +827,7 @@ M.intranet = {
         max_input_tokens = 49152,
         max_output_tokens = 8192,
         streaming = true,
-        tools = true,
+        tools = false,
         reasoning = true,
       },
     }
