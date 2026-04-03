@@ -181,7 +181,7 @@ Plug 'weiguoquan422/vim-todolist-colorscheme'
 "bookmarks
 Plug 'MattesGroeger/vim-bookmarks'
 "GitHub Copilot
-Plug 'github/copilot.vim'
+"Plug 'github/copilot.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'CopilotC-Nvim/CopilotChat.nvim'
 "vim-markdown-toc
