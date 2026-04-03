@@ -806,8 +806,7 @@ function Chat:render()
 
     -- Show reasoning as virtual text above assistant messages
     if
-      self.config.show_reasoning ~= false
-      and message.role == constants.ROLE.ASSISTANT
+      message.role == constants.ROLE.ASSISTANT
       and not utils.empty(message.reasoning)
       and message.section
       and message.section.start_line

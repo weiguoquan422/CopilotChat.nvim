@@ -36,7 +36,6 @@
 ---@field insert_at_end boolean?
 ---@field clear_chat_on_new_prompt boolean?
 ---@field stop_on_function_failure boolean?
----@field show_reasoning boolean?
 
 --- CopilotChat default configuration
 ---@class CopilotChat.config.Config : CopilotChat.config.Shared
@@ -104,7 +103,6 @@ return {
   insert_at_end = false, -- Move cursor to end of buffer when inserting text
   clear_chat_on_new_prompt = false, -- Clears chat on every new prompt
   stop_on_function_failure = false, -- Stop processing prompt if any function fails (preserves quota)
-  show_reasoning = true, -- Show reasoning/thinking content as virtual text above assistant messages
 
   -- Static config starts here (can be configured only via setup function)
 
