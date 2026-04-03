@@ -60,10 +60,10 @@ return {
 
   system_prompt = require('CopilotChat.config.prompts').COPILOT_INSTRUCTIONS.system_prompt, -- System prompt to use (can be specified manually in prompt via /).
 
-  model = 'deepseek-r1-0528', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
-  -- The 'deepseek-r1-0528' model is served by the built-in 'intranet' provider.
+  model = 'Nebula', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
+  -- The 'Nebula' model is served by the built-in 'intranet' provider.
   -- Configure the intranet endpoint and auth via environment variables:
-  --   INTRANET_AI_URL   (default: http://10.53.26.188/thinking/v1)
+  --   INTRANET_AI_URL   (default: http://10.53.26.188/agent/v1)
   --   INTRANET_AI_TOKEN (default: empty Bearer token)
   -- NOTE: Set allow_insecure = true if the intranet endpoint uses HTTP or self-signed HTTPS.
   tools = nil, -- Default tool or array of tools (or groups) to share with LLM (can be specified manually in prompt via @).
