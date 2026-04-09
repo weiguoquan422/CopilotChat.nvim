@@ -830,15 +830,26 @@ M.intranet = {
         tools = false,
         reasoning = true,
       },
+      {
+        id = 'AC14B:0704',
+        name = 'AC14B (Intranet)',
+        tokenizer = 'o200k_base', -- 根据实际模型调整
+        max_input_tokens = 49152,
+        max_output_tokens = 8192,
+        streaming = true,
+        tools = false,
+      },
     }
   end,
 
   prepare_input = prepare_chat_input,
   prepare_output = prepare_chat_output,
 
-  get_url = function()
+  get_url = function(opts)
+    if opts and opts.model and opts.model.id == 'AC14B:0704' then
+      return 'http://10.53.26.188/complete/v1/chat/completions'
+    end
     local base_url = os.getenv('INTRANET_AI_URL') or 'http://10.53.26.188/agent/v1'
-    -- Remove trailing slash if present
     base_url = base_url:gsub('/$', '')
     return base_url .. '/chat/completions'
   end,
