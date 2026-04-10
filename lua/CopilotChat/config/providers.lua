@@ -855,4 +855,35 @@ M.intranet = {
   end,
 }
 
+
+M.vision = {
+  get_headers = function()
+    return {
+      ['Content-Type'] = 'application/json',
+      ['Authorization'] = 'Bearer sk-empty',
+    }
+  end,
+
+  get_models = function()
+    return {
+      {
+        id = 'Qwen3.5',
+        name = 'Qwen 3.5 (Vision)',
+        tokenizer = 'o200k_base',
+        max_input_tokens = 32768,
+        max_output_tokens = 4096,
+        streaming = true,
+        tools = false,
+      },
+    }
+  end,
+
+  prepare_input = prepare_chat_input,
+  prepare_output = prepare_chat_output,
+
+  get_url = function()
+    return 'http://10.53.26.188/vision/v1/chat/completions'
+  end,
+}
+
 return M
