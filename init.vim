@@ -574,14 +574,25 @@ require('minuet').setup {
     provider = 'openai_compatible',
     provider_options = {
         openai_compatible = {
-            end_point = 'http://10.53.26.188/complete/v1/chat/completions',
-            api_key = '',
-            name = 'qwen2.5',
             model = 'AC14B:0704',
+            end_point = 'http://10.53.26.188/complete/v1/chat/completions',
+            api_key = 'TERM',
+            name = 'Intranet',
+            stream = true,
             optional = {
-                max_tokens = 48,
-                top_p = 0.9,
+                stop = { '\n' },
+                max_tokens = 128,
             },
+        },
+    },
+
+    virtualtext = {
+        auto_trigger_ft = {'c', 'cpp', 'verilog', 'systemverilog', 'python', 'tcsh'},
+        keymap = {
+            -- accept whole completion
+            accept = '<C-L>',
+            -- accept one line
+            accept_line = '<A-L>',
         },
     },
 }
