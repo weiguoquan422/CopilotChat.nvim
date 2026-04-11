@@ -574,10 +574,8 @@ require('minuet').setup {
     provider = 'openai_compatible',
     provider_options = {
         openai_compatible = {
-            -- model = 'AC14B:0704',
-            model = 'Nebula',
-            -- end_point = 'http://10.53.26.188/complete/v1/chat/completions',
-            end_point = 'http://10.53.26.188/agent/v1/chat/completions',
+            model = 'AC14B:0704',
+            end_point = 'http://10.53.26.188/complete/v1/chat/completions',
             api_key = 'TERM',
             name = 'Intranet',
             stream = true,

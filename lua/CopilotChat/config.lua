@@ -60,7 +60,7 @@ return {
 
   system_prompt = require('CopilotChat.config.prompts').COPILOT_INSTRUCTIONS.system_prompt, -- System prompt to use (can be specified manually in prompt via /).
 
-  model = 'AC14B:0704', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
+  model = 'Qwen3.5', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
   -- The 'AC14B:0704' model is served by the built-in 'intranet' provider.
   -- Configure the intranet endpoint and auth via environment variables:
   --   INTRANET_AI_URL   (default: http://10.53.26.188/agent/v1)
