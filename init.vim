@@ -186,6 +186,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'CopilotC-Nvim/CopilotChat.nvim'
 "vim-markdown-toc
 Plug 'mzlogin/vim-markdown-toc'
+"milanglacier/minuet-ai.nvim
+Plug 'milanglacier/minuet-ai.nvim'
 
 " Initialize plugin system
 call plug#end()
@@ -512,10 +514,10 @@ autocmd BufRead,BufNewFile *.md UltiSnipsAddFiletypes md.tex
 
 "Copilot key mapping
 "delete accept default mapping, use <C-L> to accept
-imap <silent><script><expr> <C-L> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
+"imap <silent><script><expr> <C-L> copilot#Accept("\<CR>")
+"let g:copilot_no_tab_map = v:true
 "dissable copilot in markdown
-autocmd FileType markdown let b:copilot_enabled = 0
+"autocmd FileType markdown let b:copilot_enabled = 0
 
 
 "vim-stock-monitor
@@ -566,4 +568,21 @@ require("CopilotChat").setup({
     },
   },
 })
+
+
+require('minuet').setup {
+    provider = 'openai_compatible',
+    provider_options = {
+        openai_compatible = {
+            end_point = 'http://10.53.26.188/complete/v1/chat/completions',
+            api_key = '',
+            name = 'qwen2.5',
+            model = 'AC14B:0704',
+            optional = {
+                max_tokens = 48,
+                top_p = 0.9,
+            },
+        },
+    },
+}
 EOF
