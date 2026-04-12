@@ -555,6 +555,7 @@ autocmd BufRead,BufNewFile *.md colorscheme markdown
 "I change it to <C-x>.
 lua << EOF
 require("CopilotChat").setup({
+  debug = true, -- 这会开启底层 curl 请求的日志
   allow_insecure = true,
   mappings = {
     reset = {
