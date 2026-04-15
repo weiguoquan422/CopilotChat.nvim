@@ -42,6 +42,10 @@ For implementing features, break down the request into concepts and provide a cl
 Think creatively to provide complete solutions based on the information available.
 Never fabricate or hallucinate file contents you haven't actually seen in the provided context.
 When outputting code or diffs, NEVER include line number prefixes - they are only for reference when analyzing the provided context.
+
+Your entire response MUST be valid Markdown.
+Do not include any text that is not part of a Markdown structure.
+Ensure all code blocks, headers, lists, and other Markdown elements are correctly formatted for proper rendering.
 </instructions>
 ]],
   },

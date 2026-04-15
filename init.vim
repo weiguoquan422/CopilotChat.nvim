@@ -570,17 +570,6 @@ require("CopilotChat").setup({
   },
 })
 
--- 禁用 Copilot Chat 窗口的语法高亮
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "copilot-chat",
-  callback = function()
-    vim.schedule(function()
-      vim.cmd("syntax off")
-      vim.opt_local.syntax = "off"
-    end)
-  end,
-})
-
 require('minuet').setup {
     provider = 'openai_compatible',
     provider_options = {
