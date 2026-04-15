@@ -2,6 +2,12 @@ local resources = require('CopilotChat.resources')
 local utils = require('CopilotChat.utils')
 local files = require('CopilotChat.utils.files')
 
+---@param bufnr number?
+---@return boolean
+local function is_source_buffer(bufnr)
+  return utils.buf_valid(bufnr) and vim.bo[bufnr].buftype == ''
+end
+
 --- Get diagnostics for a buffer and format them as text
 ---@param bufnr number
 ---@param start_line number?
@@ -168,8 +174,13 @@ return {
 
       -- Determine which buffers to include based on scope
       if scope == 'active' then
-        if source and source.bufnr and utils.buf_valid(source.bufnr) then
+        if source and is_source_buffer(source.bufnr) then
           buffers = { source.bufnr }
+        elseif source and source.winnr and vim.api.nvim_win_is_valid(source.winnr) then
+          local source_bufnr = vim.api.nvim_win_get_buf(source.winnr)
+          if is_source_buffer(source_bufnr) then
+            buffers = { source_bufnr }
+          end
         end
       elseif scope == 'visible' then
         buffers = vim.tbl_filter(function(b)
