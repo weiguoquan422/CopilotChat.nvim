@@ -570,11 +570,14 @@ require("CopilotChat").setup({
   },
 })
 
--- 禁用 Copilot Chat 窗口的 Markdown 语法高亮
+-- 禁用 Copilot Chat 窗口的语法高亮
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "copilot-chat",
   callback = function()
-    vim.bo.filetype = "" -- 清除文件类型以取消配色
+    vim.schedule(function()
+      vim.cmd("syntax off")
+      vim.opt_local.syntax = "off"
+    end)
   end,
 })
 
