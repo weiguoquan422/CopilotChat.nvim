@@ -570,6 +570,13 @@ require("CopilotChat").setup({
   },
 })
 
+-- 禁用 Copilot Chat 窗口的 Markdown 语法高亮
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "copilot-chat",
+  callback = function()
+    vim.bo.filetype = "" -- 清除文件类型以取消配色
+  end,
+})
 
 require('minuet').setup {
     provider = 'openai_compatible',
