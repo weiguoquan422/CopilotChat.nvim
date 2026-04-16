@@ -390,7 +390,7 @@ function Client:ask(opts)
         remaining_tokens = remaining_tokens - tokens
         table.insert(generated_messages, message)
       else
-        log.debug('Skipping resource due to token limit:', tokens, '>', remaining_tokens)
+        log.debug(string.format('Skipping resource due to token limit: required %d > available %d', tokens, remaining_tokens))
       end
     end
   else
