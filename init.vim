@@ -587,7 +587,7 @@ require('minuet').setup {
     },
 
     virtualtext = {
-        auto_trigger_ft = {'c', 'cpp', 'verilog', 'systemverilog', 'python', 'tcsh', 'bash', 'v'},
+        auto_trigger_ft = {'c', 'cpp', 'verilog', 'systemverilog', 'python', 'tcsh', 'bash', 'v', 'copilot-chat'},
         keymap = {
             -- accept whole completion
             accept = '<C-L>',

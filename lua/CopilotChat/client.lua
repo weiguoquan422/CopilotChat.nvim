@@ -363,12 +363,11 @@ function Client:ask(opts)
     -- Count required tokens that we cannot reduce
     local system_tokens = tiktoken:count(opts.system_prompt)
     local prompt_tokens = #history > 0 and tiktoken:count(history[#history].content) or 0
-    local resource_tokens = #resource_messages > 0 and tiktoken:count(resource_messages[1].content) or 0
-    local required_tokens = prompt_tokens + system_tokens + resource_tokens
+    local required_tokens = prompt_tokens + system_tokens
 
     log.debug('System tokens:', system_tokens)
     log.debug('Prompt tokens:', prompt_tokens)
-    log.debug('Resource tokens:', resource_tokens)
+    log.debug('Required tokens:', required_tokens)
 
     -- Calculate how many tokens we can use for history
     local history_limit = max_tokens - required_tokens
@@ -391,6 +390,7 @@ function Client:ask(opts)
         remaining_tokens = remaining_tokens - tokens
         table.insert(generated_messages, message)
       else
+        log.debug('Not enough tokens for message, skipping remaining resources!')
         break
       end
     end
