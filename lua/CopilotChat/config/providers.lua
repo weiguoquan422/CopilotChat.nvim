@@ -802,14 +802,8 @@ M.github_models = {
   end,
 }
 
---- Intranet AI provider for accessing internal network AI models.
---- Configuration via environment variables:
----   INTRANET_AI_URL   - Base URL of the internal AI API
----                       (default: http://10.53.26.188/agent/v1)
----                       NOTE: The default uses plain HTTP. Use HTTPS or set
----                       allow_insecure = true in your setup() if appropriate.
----   INTRANET_AI_TOKEN - Bearer token for authentication (default: empty)
-M.intranet = {
+--- Nebula AI provider
+M.nebula = {
   get_headers = function()
     local token = os.getenv('INTRANET_AI_TOKEN') or ''
     return {
@@ -817,7 +811,6 @@ M.intranet = {
       ['Authorization'] = 'Bearer ' .. token,
     }
   end,
-
   get_models = function()
     return {
       {
@@ -825,15 +818,36 @@ M.intranet = {
         name = 'Nebula (Intranet)',
         tokenizer = 'o200k_base',
         max_input_tokens = 131072,
-        max_output_tokens = 65536,
+        max_output_tokens = 32768,
         streaming = true,
         tools = false,
         reasoning = true,
       },
+    }
+  end,
+  prepare_input = prepare_chat_input,
+  prepare_output = prepare_chat_output,
+  get_url = function()
+    local base_url = os.getenv('INTRANET_AI_URL') or 'http://10.53.26.188/agent/v1'
+    return base_url:gsub('/$', '') .. '/chat/completions'
+  end,
+}
+
+--- AC14B AI provider
+M.ac14b = {
+  get_headers = function()
+    local token = os.getenv('INTRANET_AI_TOKEN') or ''
+    return {
+      ['Content-Type'] = 'application/json',
+      ['Authorization'] = 'Bearer ' .. token,
+    }
+  end,
+  get_models = function()
+    return {
       {
         id = 'AC14B:0704',
         name = 'AC14B (Intranet)',
-        tokenizer = 'o200k_base', -- 根据实际模型调整
+        tokenizer = 'o200k_base',
         max_input_tokens = 131072,
         max_output_tokens = 65536,
         streaming = true,
@@ -841,20 +855,12 @@ M.intranet = {
       },
     }
   end,
-
   prepare_input = prepare_chat_input,
   prepare_output = prepare_chat_output,
-
-  get_url = function(opts)
-    if opts and opts.model and opts.model.id == 'AC14B:0704' then
-      return 'http://10.53.26.188/complete/v1/chat/completions'
-    end
-    local base_url = os.getenv('INTRANET_AI_URL') or 'http://10.53.26.188/agent/v1'
-    base_url = base_url:gsub('/$', '')
-    return base_url .. '/chat/completions'
+  get_url = function()
+    return 'http://10.53.26.188/complete/v1/chat/completions'
   end,
 }
-
 
 M.vision = {
   get_headers = function()
@@ -883,6 +889,35 @@ M.vision = {
 
   get_url = function()
     return 'http://10.53.26.188/vision/v1/chat/completions'
+  end,
+}
+
+--- DeepSeek AI provider
+M.deepseek = {
+  get_headers = function()
+    return {
+      ['Content-Type'] = 'application/json',
+      ['Authorization'] = 'Bearer b0cpyeh21myj28q23q0i7hy2475l12r0',
+    }
+  end,
+  get_models = function()
+    return {
+      {
+        id = 'deepseek-r1-0528',
+        name = 'DeepSeek R1',
+        tokenizer = 'o200k_base',
+        max_input_tokens = 131072,
+        max_output_tokens = 32768,
+        streaming = true,
+        tools = false,
+        reasoning = true,
+      },
+    }
+  end,
+  prepare_input = prepare_chat_input,
+  prepare_output = prepare_chat_output,
+  get_url = function()
+    return 'http://10.53.26.188/thinking/v1/chat/completions'
   end,
 }
 
